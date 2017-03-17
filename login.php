@@ -1,22 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<form action="" method="POST">
+		Username:<input type="text" name="username"/><br>
+		Password:<input type="password" name="password"/><br>
+		<input type="submit" name="submit" value="Login"/>
+	</form>
+</body>
+</html>
 <?php
 session_start();
-if (isset($_POST['submit'])) {
-if (empty($_POST['username']) || empty($_POST['password'])) {
-}
-else{
-$username=$_POST['username'];
-$password=$_POST['password'];
-$connection = mysql_connect("localhost", "root", "");
-$username = stripslashes($username);
-$password = stripslashes($password);
-$username = mysql_real_escape_string($username);
-$password = mysql_real_escape_string($password);
-$db = mysql_select_db("chat", $connection);
-$query = mysql_query("select * from login where password='$password' AND username='$username'", $connection);
-$rows = mysql_num_rows($query);
-$_SESSION['login_user']=$username; 
-header("location: profile.php"); 
-mysql_close($connection); 
-}
+include('db_connect.php');
+if(isset($_POST['submit'])) 
+{
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	if(($username == 'Veroni2000' && $password == '123456789')||($username == 'Iva13' && $password == 'ivaeyaka'))
+	{                              
+		$_SESSION['user']=$username;
+		echo '<script type="text/javascript"> window.open("read.php","_self");</script>'; 
+	}else
+	{
+		echo "Invalid username or password!";        
+	}
 }
 ?>

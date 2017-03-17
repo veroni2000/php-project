@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `login` (
-  `id` int(11) NOT NULL,
+  `login_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -36,9 +36,22 @@ CREATE TABLE `login` (
 -- Схема на данните от таблица `login`
 --
 
-INSERT INTO `login` (`id`, `username`, `password`) VALUES
+INSERT INTO `login` (`login_id`, `username`, `password`) VALUES
 (1, 'veroni2000', '123456789'),
 (2, 'iva13', 'ivaeyaka');
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `login_id` int(11) NOT NULL,
+  `msg` varchar(500) NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -48,6 +61,12 @@ INSERT INTO `login` (`id`, `username`, `password`) VALUES
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
+  ADD PRIMARY KEY (`login_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
