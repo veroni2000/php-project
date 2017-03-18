@@ -14,15 +14,15 @@
 </html>
 <?php
 session_start();
-include('db_connect.php');
-if(isset($_POST['submit'])) 
+include('db_connect.php');  //Connection with the database.
+if(isset($_POST['submit'])) //Checking if the submit button is pressed.
 {
 	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$password = $_POST['password']; //Getting username and password from the login form.
 	if(($username == 'Veroni2000' && $password == '123456789')||($username == 'Iva13' && $password == 'ivaeyaka'))
-	{                              
+	{       //Checking if entered username and password are valid.                    
 		$_SESSION['user']=$username;
-		echo '<script type="text/javascript"> window.open("read.php","_self");</script>'; 
+		echo '<script type="text/javascript"> window.open("index.php","_self");</script>'; //If valid user is entered, it returns you to the home page.
 	}else
 	{
 		echo "Invalid username or password!";        
