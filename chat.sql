@@ -28,40 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `msg` varchar(500) NOT NULL,
   `ctime` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Схема на данните от таблица `messages`
---
-
-INSERT INTO `messages` (`id`, `username`, `msg`, `ctime`) VALUES
-(281, 'Veroni2000', ';D', '17:25:29'),
-(282, 'Veroni2000', ';D', '17:28:05'),
-(283, 'Veroni2000', ';D', '17:29:28'),
-(284, 'Veroni2000', 'dsf', '17:48:21'),
-(285, 'Veroni2000', 'sfzdsf', '17:48:33'),
-(286, 'Veroni2000', 'sfzdsf', '17:48:40'),
-(287, 'Veroni2000', ';D', '17:50:05'),
-(288, 'Veroni2000', ';D', '17:50:40'),
-(289, 'Iva13', 'sfsdf', '17:50:47'),
-(290, 'Iva13', 'gotina Iva', '17:50:57'),
-(291, 'Veroni2000', ':)', '17:51:03'),
-(292, 'Iva13', 'gotina Iva', '17:51:12'),
-(293, 'Iva13', ';)', '17:51:48'),
-(294, 'Iva13', ':)', '17:51:51'),
-(295, 'Iva13', ';)', '17:52:01'),
-(296, 'Veroni2000', ';D', '17:52:11'),
-(297, 'Iva13', 'sfsf', '17:52:17'),
-(298, 'Iva13', 'яка', '17:56:45'),
-(299, 'Iva13', 'оаьяояо', '17:57:04'),
-(300, 'Veroni2000', 'ffff', '18:29:46'),
-(301, 'Veroni2000', 'ffff', '18:29:58'),
-(302, 'Veroni2000', 'ffff', '18:30:33'),
-(303, 'Veroni2000', 'fffdfd', '18:30:39'),
-(304, 'Veroni2000', 'fffdfd', '18:48:02');
 
 -- --------------------------------------------------------
 
@@ -80,8 +50,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
-(1, 'Veroni2000', '123456789'),
-(2, 'Iva13', 'ivaeyaka');
+(1, 'Veroni2000', 'asdfghjkl'),
+(2, 'Iva13', 'ivaeyaka'),
+(3, 'username', '123');
 
 --
 -- Indexes for dumped tables
@@ -92,8 +63,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `login_id` (`username`),
-  ADD KEY `username` (`username`);
+  ADD KEY `login_id` (`user_id`),
+  ADD KEY `username` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -109,12 +80,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

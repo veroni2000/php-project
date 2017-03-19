@@ -1,52 +1,41 @@
-<?php 
-session_start();
-include('db_connect.php');
-if(!isset($_SESSION['user']))
-{
-	header("Location:login.php");  //If there isn`t session, it returns you to the login page.
-}
-	$smileys=array( //Array with all the symbols that can turn into emoticons.
-		':)'=>'😊',
-		':-)'=>'😊',
-		'<3'=>'💗',
-		':Д'=>'😀',
-		':D'=>'😀',
-		':d'=>'😀',
-		';Д'=>'😂',
-		';D'=>'😂',
-		';d'=>'😂',
-		';*'=>'😘',
-		':*'=>'😘',
-		':/'=>'😐',
-		':@'=>'😠',
-		':o'=>'😲',
-		':O'=>'😲',
-		':('=>'😔',
-		'o:)'=>'😇',
-		'O:)'=>'😇',
-		';('=>'😢',
-		":'("=>'😭',
-		';)'=>'😉',
-		':p'=>'😛',
-		':P'=>'😛',
-		';p'=>'😜',
-		';P'=>'😜',
-		'B)'=>'😎',
-		'*poop*'=>'💩',
-		'(y)'=>'👍',
-		'(n)'=>'👎',
-		);
-	if(!empty($_POST['submit']))  //Checking if the submit button is pressed.
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Chat</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<?php 
+	session_start();
+	include('db_connect.php');
+	include('header.php');
+	include('emoji.php');
+	if(!isset($_SESSION['username']))
+	{
+		echo "You need to <a href='login.php'>log in</a> or <a href='register.php'>sign up</a>!";
+  //If there isn`t session, it returns you to the login page.
+	}
+	else{
+	$read_query = "SELECT * FROM  users where username='".$_SESSION['username']."'";  //Getting current user.
+	$result = mysqli_query($conn, $read_query);
+	if (mysqli_num_rows($result)>0) {
+		while($row = mysqli_fetch_assoc($result)){
+			echo "<div id='wrapper'><div id='menu'><p class='welcome'>Welcome, <b>".$row['username']."</b></p>
+			<p class='logout'><a id='exit' href='logout.php'>Log out</a></p><div style='clear:both'></div>
+</div><div id='chatbox'>";
+			$user_id=$row['user_id']; //Getting current user`s id.
+		}
+	if(isset($_POST['submit']))  //Checking if the submit button is pressed.
 	{
 		$cmsg=$_POST['msg'];  //Getting current message.
 		date_default_timezone_set('europe/sofia');
 		$ctime=date("H:i:s"); //Getting current time.
-		$username=$_SESSION['user']; //Getting user data.
-		$insert_query = "INSERT INTO messages (msg,ctime,username) VALUES ('$cmsg','$ctime','$username')"; //Insert user, time and message into the database.
-		if (mysqli_query($conn, $insert_query)) {
+		$insert_query = "INSERT INTO messages (msg,ctime,user_id) VALUES ('$cmsg','$ctime','$user_id')"; //Insert user, time and message into the database.
+		if (mysqli_query($conn, $insert_query)) {  
 		}
 	}
-	$read_query = "SELECT * FROM messages";  //Reading messages from the database.
+	$read_query = "SELECT * FROM messages JOIN users ON messages.user_id=users.user_id";  //Reading messages from the database.
 	$result = mysqli_query($conn, $read_query);
 	if (mysqli_num_rows($result)>0) {
 		while($row = mysqli_fetch_assoc($result)){	
@@ -60,13 +49,29 @@ if(!isset($_SESSION['user']))
 					}
 				} 
 			}
-			echo $row['ctime']." | " . $row['username'] . ": ".$msg."<br>"; //Showing the message with user and time.
+			echo "<p>".$row['ctime']." | " . $row['username'] . ": ".$msg; //Showing the message with user and time.
+			if ($_SESSION['username']=='Veroni2000'||$_SESSION['username']=='Iva13') {
+				echo " <a href='delete.php?id=" .$row['id'] . "' class='delete'>Delete</a></p>"; //We can delete everyone`s messages.
+			}
+			elseif ($row['username']==$_SESSION['username']) {
+				echo " <a href='delete.php?id=" .$row['id'] . "' class='delete'>Delete</a></p>"; //Everyone else can delete only their own messages.
+			}
 		}
 	}
+	?>
+	<form method="post" action="" id="message">
+		<input type="text" name="msg" id="msg" size="63">
+		<input type="submit" name="submit" value="Send">	
+	</form>
+	<?php
+}
+}
 ?>
-<form method="post" action="">
-	<input type="text" name="msg">
-	<input type="submit" name="submit" value="Send">	
-</form>
-<?php
-echo "<a href='logout.php'>Log out</a> "; //If you press the logout button, it returns you to the logout page.
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript">
+// jQuery Document
+$(document).ready(function(){
+});
+</script>
+</body>
+</html>
