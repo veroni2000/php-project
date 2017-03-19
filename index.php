@@ -35,7 +35,7 @@
 		if (mysqli_query($conn, $insert_query)) {  
 		}
 	}
-	$read_query = "SELECT * FROM messages JOIN users ON messages.user_id=users.user_id";  //Reading messages from the database.
+	$read_query = "SELECT * FROM messages JOIN users ON messages.user_id=users.user_id ORDER BY `ctime`";  //Reading messages from the database.
 	$result = mysqli_query($conn, $read_query);
 	if (mysqli_num_rows($result)>0) {
 		while($row = mysqli_fetch_assoc($result)){	
