@@ -3,6 +3,12 @@ body {
     color: #222;
     text-align:center;
     padding:35px;
+	background-image:url(back.gif);
+	background-attachment:fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
  }
   
 form, p, span {
@@ -12,17 +18,22 @@ form, p, span {
 input { font:12px arial; }
   
 a {
-    color:#0000FF;
+    color:#9c27b0;
+	font-weight:bold;
     text-decoration:none; }
   
-    a:hover { text-decoration:underline; }
+    a:hover { text-decoration:underline; 
+	}
   
 #wrapper, #loginform {
-    margin:0 auto;
-    padding-bottom:25px;
-    background:#EBF4FB;
-    width:504px;
-    border:1px solid #ACD8F0; }
+    margin: 0 auto;
+    padding-bottom: 25px;
+    background: #EBF4FB;
+    width: 30%;
+    border: 3px solid #00BCD4;
+    border-radius: 15px;
+    color: #00BCD4;
+	}
   
 #loginform { padding-top:18px; }
   
@@ -32,19 +43,26 @@ a {
     text-align:left;
     margin:0 auto;
     margin-bottom:25px;
-    padding:10px;
+    padding:20px;
     background:#fff;
-    height:270px;
-    width:430px;
-    border:1px solid #ACD8F0;
-    overflow:auto; }
-    #message{
+    height:350px;
+    width:90%;
+    border:1px solid #00BCD4;
+    overflow:auto; 
+	
+	}
+#message{
         position: absolute;
-        bottom: 230px;
+       top: 550px;
     }
 #msg {
-    width:330px;
-    border:1px solid #ACD8F0;
+    width: 70%;
+    border: 3px solid #00BCD4;
+    padding: 10px;
+    border-radius: 15px;
+    color: #9c27b0;
+    font-size: 14px;
+    font-weight: bold;
     }
 #submit{
     width: 60px;
@@ -54,9 +72,9 @@ a {
   
 #menu { padding:12.5px 25px 12.5px 25px; }
   
-.welcome { float:left; }
+.welcome { float:left; color: #9c27b0; }
   
-.logout { float:right; }
+.logout { float:right; color: #9c27b0; }
   
 .msgln { margin:0 0 2px 0; }
 
@@ -64,4 +82,18 @@ a {
     float: right;
     font-size: 12px;
 }
-
+.login {
+height:110px;
+width:190px;
+margin:auto;
+padding:10px;
+}
+.login input {
+width: 70%;
+    border: 3px solid #00BCD4;
+    padding: 10px;
+    border-radius: 15px;
+    color: #9c27b0;
+    font-size: 14px;
+    font-weight: bold;
+}
