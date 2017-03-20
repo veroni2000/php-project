@@ -61,7 +61,7 @@
 	?>
 	<form method="post" action="" id="message">
 		<input type="text" name="msg" id="msg" size="63">
-		<input type="submit" name="submit" value="Send">	
+		<input style="border-radius:10px; padding:6px; background-color:#9c27b0; color:#fff; font-size:14px;" type="submit" name="submit" value="Send">	
 	</form>
 	<?php
 }
